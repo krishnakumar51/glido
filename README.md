@@ -2,6 +2,35 @@
 
 A multi-agent AI pipeline that researches, strategizes, writes, analyzes, and refines Instagram Reel scripts for finance content — end-to-end with **real web signals** and **two LLM providers** (OpenAI + Anthropic), plus Tavily for competitor/trend research.
 
+
+## 🚀 Quick Demo
+
+🎥 2-min product walkthrough:  
+https://www.loom.com/share/57512b560e7848888ce71bb0cbeb9485
+
+## Setup
+
+```bash
+pip install -r requirements.txt
+cp .env.example .env
+
+streamlit run app.py
+```
+
+Keys can also be entered in the Streamlit sidebar; `.env` is loaded automatically via `python-dotenv`.
+
+## API keys
+
+| Key | Required | Usage |
+|-----|----------|--------|
+| `ANTHROPIC_API_KEY` | Yes | Agents 1 (synthesis), 3, 4 |
+| `OPENAI_API_KEY` | Yes | Agent 2 (writer) |
+| `TAVILY_API_KEY` | Recommended | Agent 1 live search; without it, synthesis falls back to weaker context |
+
+Optional: `OPENAI_MODEL` (default `gpt-5.4-mini`).
+
+
+
 ## Architecture
 
 ```
@@ -47,32 +76,6 @@ INPUT: niche + competitor handles
 | Strategy JSON synthesis | Rank top 5 ideas from search context | **Anthropic** Claude `claude-sonnet-4-20250514` |
 | Script writing | Scroll-stopping Reel scripts (JSON) | **OpenAI** `gpt-5.4-mini` (override via `OPENAI_MODEL`) |
 | Analysis & refinement | Scores, critique, polish | **Anthropic** Claude (same model) |
-
-
-## 🎥 Demo
-
-[![Demo Loom Link](https://cdn.loom.com/sessions/thumbnails/57512b560e7848888ce71bb0cbeb9485-with-play.gif)](https://www.loom.com/share/57512b560e7848888ce71bb0cbeb9485)
-## Setup
-
-```bash
-pip install -r requirements.txt
-cp .env.example .env
-# Edit .env: ANTHROPIC_API_KEY, OPENAI_API_KEY, TAVILY_API_KEY (recommended)
-
-streamlit run app.py
-```
-
-Keys can also be entered in the Streamlit sidebar; `.env` is loaded automatically via `python-dotenv`.
-
-## API keys
-
-| Key | Required | Usage |
-|-----|----------|--------|
-| `ANTHROPIC_API_KEY` | Yes | Agents 1 (synthesis), 3, 4 |
-| `OPENAI_API_KEY` | Yes | Agent 2 (writer) |
-| `TAVILY_API_KEY` | Recommended | Agent 1 live search; without it, synthesis falls back to weaker context |
-
-Optional: `OPENAI_MODEL` (default `gpt-5.4-mini`).
 
 ## Features
 
